@@ -22,6 +22,20 @@
             {% else %}<a class="nav-link" href="{% url 'contact' %}">Contact</a>{% endif %}
           </li>
         </ul>
+        <ul class="navbar-nav ml-auto">
+          <li class="nav-item">
+            {% if user.is_authenticated %}
+            {% url 'profile' as profile_url %}
+            <a>Hello, {% if request.path == profile_url %}{{ user.username }}{% else %}<a href="{{ profile_url }}">{{user.username}}</a>{% endif %}</a>
+            <!-- put logout on profile insted! -->
+            <li class="nav-item">
+              <a class="nav-link" href="{% url 'logout' %}">Logout</a>
+            </li>
+            {% else %}
+            <a class="nav-link" href="{% url 'login' %}">Login</a>
+            {% endif %}
+          </li>
+        </ul>
       </div>
     </div>
   </nav>
